@@ -1,6 +1,8 @@
+# 키가 든 파일 — .env.example만 올린다
 .env
 .env.*
 !.env.example
+
 node_modules
 .vercel
 .playwright-mcp
