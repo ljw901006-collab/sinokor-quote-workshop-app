@@ -186,7 +186,7 @@ async function handleExtract(req, res, { apiKey, model }) {
     apiKey,
     model,
     prompt: EXTRACT_PROMPT(text),
-    timeoutMs: 30000,
+    timeoutMs: 55000,
     generationConfig: { responseMimeType: 'application/json', temperature: 0 },
   });
 
@@ -279,7 +279,7 @@ async function handleDraft(req, res, { apiKey, model }) {
     apiKey,
     model,
     prompt: DRAFT_PROMPT(input, result),
-    timeoutMs: 40000,
+    timeoutMs: 55000,
     generationConfig: { temperature: 0.3 },
   });
 
