@@ -1,0 +1,487 @@
+/* DESIGN.md의 기준을 그대로 옮긴 값들.
+   색·크기·모서리·간격을 여기서만 정의하고 아래에서 토큰으로 쓴다. */
+
+:root {
+  /* 색 */
+  --canvas: #fffaf0;
+  --ink: #0a0a0a;
+  --body: #3a3a3a;
+  --muted: #6a6a6a;
+  --surface-card: #faf5e8;
+  --surface-strong: #f5f0e0;
+  --hairline: #e5e5e5;
+  --primary: #0a0a0a;
+  --primary-active: #1f1f1f;
+  --on-primary: #ffffff;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* 모서리 */
+  --radius-badge: 8px;
+  --radius-control: 12px;
+  --radius-card: 16px;
+  --radius-card-strong: 24px;
+
+  /* 간격 — 8 · 16 · 24 · 32 네 단계만 */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+
+  /* 최소 높이 */
+  --control-height: 44px;
+
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic",
+    "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: var(--space-3);
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* ── 머리말 ───────────────────────────────── */
+
+.site-header {
+  margin-bottom: var(--space-4);
+}
+
+.site-header h1 {
+  margin: 0 0 var(--space-1);
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 1.15;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ── 배치 ─────────────────────────────────── */
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  min-width: 0; /* 그리드 칸이 내용 때문에 넘치지 않도록 */
+  padding: var(--space-3);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  background: var(--surface-card);
+}
+
+.panel h2 {
+  margin: 0 0 var(--space-1);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.help {
+  margin: 0 0 var(--space-2);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ── 문의 원문 ────────────────────────────── */
+
+.inquiry-text {
+  margin: 0;
+  padding: var(--space-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-control);
+  background: var(--canvas);
+  color: var(--body);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ── 입력 ─────────────────────────────────── */
+
+.field {
+  display: block;
+  margin-bottom: var(--space-2);
+  min-width: 0;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: 14px;
+  color: var(--body);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+@media (max-width: 600px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+input,
+select {
+  width: 100%;
+  min-height: var(--control-height);
+  padding: 12px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-control);
+  background: #ffffff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+/* ── 버튼 ─────────────────────────────────── */
+
+.btn {
+  min-height: var(--control-height);
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--primary-active);
+}
+
+.btn-secondary {
+  border-color: var(--hairline);
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-strong);
+}
+
+.btn:disabled {
+  background: var(--hairline);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* ── 비용 검토 표 ─────────────────────────── */
+
+.panel-wide {
+  margin-top: var(--space-4);
+  border-radius: var(--radius-card-strong);
+  background: var(--surface-strong);
+}
+
+.section-title {
+  margin: var(--space-3) 0 var(--space-1);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 넓은 표는 페이지가 아니라 표 자신이 가로로 스크롤한다 */
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-control);
+  background: var(--canvas);
+}
+
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.cost-table th,
+.cost-table td {
+  padding: var(--space-1) var(--space-2);
+  border-bottom: 1px solid var(--hairline);
+  text-align: left;
+  vertical-align: top;
+}
+
+.cost-table thead th {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cost-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.cost-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cost-table .amount {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cost-table a {
+  color: var(--ink);
+}
+
+.source-checked,
+.assumption {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ── 배지 ─────────────────────────────────── */
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-badge);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-public {
+  background: var(--success);
+  color: #ffffff;
+}
+
+.badge-estimate {
+  background: var(--warning);
+  color: #0a0a0a;
+}
+
+.badge-partial,
+.badge-hold {
+  background: var(--warning);
+  color: #0a0a0a;
+}
+
+/* ── 통화별 소계 ──────────────────────────── */
+
+.subtotals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.subtotal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1);
+  min-width: 0;
+  padding: var(--space-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-control);
+  background: var(--canvas);
+}
+
+.subtotal-currency {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.subtotal-amount {
+  font-size: 24px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.subtotal-empty {
+  color: var(--muted);
+  font-size: 14px;
+  list-style: none;
+}
+
+/* ── 보류 ─────────────────────────────────── */
+
+.held-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.held-item {
+  padding: var(--space-2);
+  margin-bottom: var(--space-1);
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--warning);
+  border-radius: var(--radius-control);
+  background: var(--canvas);
+}
+
+.held-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: 4px;
+}
+
+.held-reason {
+  color: var(--body);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+/* 좁은 화면(태블릿 이하)에서는 표를 카드로 쌓아
+   가로로 밀지 않고도 금액이 바로 보이게 한다. */
+@media (max-width: 768px) {
+  .table-scroll {
+    overflow-x: visible;
+    border: none;
+    background: transparent;
+  }
+
+  .cost-table,
+  .cost-table tbody,
+  .cost-table tr,
+  .cost-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .cost-table thead {
+    display: none;
+  }
+
+  .cost-table tr {
+    margin-bottom: var(--space-1);
+    padding: var(--space-2);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-control);
+    background: var(--canvas);
+  }
+
+  .cost-table td {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: var(--space-1);
+    padding: 4px 0;
+    border-bottom: none;
+  }
+
+  /* 칸 이름을 왼쪽에 붙인다 */
+  .cost-table td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .cost-table .num {
+    text-align: left;
+    white-space: normal;
+  }
+
+  /* 항목 이름은 카드 제목처럼 */
+  .cost-table td:first-child {
+    display: block;
+    margin-bottom: var(--space-1);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .cost-table td:first-child::before {
+    content: none;
+  }
+
+  .subtotal {
+    flex: 1 1 100%;
+  }
+}
+
+
+/* ── AI 동작 (비트8-2) ────────────────────── */
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.ai-status {
+  margin: var(--space-1) 0 0;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.ai-status.is-busy {
+  color: var(--muted);
+}
+
+.ai-status.is-ok {
+  color: var(--body);
+}
+
+.ai-status.is-warn {
+  color: #8a5a00;
+}
+
+.ai-status.is-error {
+  color: var(--error);
+}
+
+.draft-text {
+  width: 100%;
+  margin-top: var(--space-2);
+  padding: var(--space-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-control);
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.7;
+  resize: vertical;
+}

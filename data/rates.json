@@ -1,0 +1,140 @@
+[
+  {
+    "id": "ocean",
+    "label": "기본 해상운임",
+    "currency": "USD",
+    "amounts": {
+      "20": 300,
+      "40": 600
+    },
+    "basis": "container",
+    "side": "freight",
+    "provenance": "estimate",
+    "sourceId": "TRAINING-ASSUMPTION",
+    "assumption": "미확보 기본 운임의 교육용 가정. 40ft는 계산 비교용으로 20ft의 2배. 실제 시세 추정 아님.",
+    "effectiveFrom": "2026-09-01",
+    "effectiveTo": "2026-10-31",
+    "origin": "KRPUS",
+    "destination": "VNHPH",
+    "containerType": "GP",
+    "unit": "KRW/VND 원단위; USD 달러 센트가 아닌 정수 금액"
+  },
+  {
+    "id": "lsf",
+    "label": "저유황유 할증료 LSF",
+    "currency": "USD",
+    "amounts": {
+      "20": 200,
+      "40": 400
+    },
+    "basis": "container",
+    "side": "origin",
+    "provenance": "public",
+    "sourceId": "SK-LSF-Q3",
+    "assumption": "",
+    "effectiveFrom": "2026-07-01",
+    "effectiveTo": "2026-09-30",
+    "origin": "KRPUS",
+    "destination": "VNHPH",
+    "containerType": "GP",
+    "unit": "KRW/VND 원단위; USD 달러 센트가 아닌 정수 금액"
+  },
+  {
+    "id": "tsf",
+    "label": "항만시설 보안료 TSF",
+    "currency": "KRW",
+    "amounts": {
+      "20": 145,
+      "40": 290
+    },
+    "basis": "container",
+    "side": "origin",
+    "provenance": "public",
+    "sourceId": "SK-TSF",
+    "assumption": "",
+    "effectiveFrom": "2026-07-01",
+    "effectiveTo": null,
+    "origin": "KRPUS",
+    "destination": "VNHPH",
+    "containerType": "GP",
+    "unit": "KRW/VND 원단위; USD 달러 센트가 아닌 정수 금액"
+  },
+  {
+    "id": "othc",
+    "label": "출발지 터미널 비용 THC",
+    "currency": "KRW",
+    "amounts": {
+      "20": 150000,
+      "40": 210000
+    },
+    "basis": "container",
+    "side": "origin",
+    "provenance": "public",
+    "sourceId": "SK-THC",
+    "assumption": "",
+    "effectiveFrom": "2024-06-15",
+    "effectiveTo": null,
+    "origin": "KRPUS",
+    "destination": "VNHPH",
+    "containerType": "GP",
+    "unit": "KRW/VND 원단위; USD 달러 센트가 아닌 정수 금액"
+  },
+  {
+    "id": "odoc",
+    "label": "출발지 서류비",
+    "currency": "KRW",
+    "amounts": {
+      "bl": 40000
+    },
+    "basis": "bl",
+    "side": "origin",
+    "provenance": "estimate",
+    "sourceId": "KM-REFERENCE",
+    "assumption": "타사 공개 B/L 단위 구조와 규모를 참고한 교육용 가정.",
+    "effectiveFrom": "2026-09-01",
+    "effectiveTo": "2026-10-31",
+    "origin": "KRPUS",
+    "destination": "VNHPH",
+    "containerType": "GP",
+    "unit": "KRW/VND 원단위; USD 달러 센트가 아닌 정수 금액"
+  },
+  {
+    "id": "dthc",
+    "label": "도착지 터미널 비용 THC",
+    "currency": "USD",
+    "amounts": {
+      "20": 140,
+      "40": 210
+    },
+    "basis": "container",
+    "side": "destination",
+    "provenance": "estimate",
+    "sourceId": "KM-REFERENCE",
+    "assumption": "타사 비교 금액 138/208달러를 140/210으로 둔 연습용 가정. 실제 선사 요율 아님.",
+    "effectiveFrom": "2026-09-01",
+    "effectiveTo": "2026-10-31",
+    "origin": "KRPUS",
+    "destination": "VNHPH",
+    "containerType": "GP",
+    "unit": "KRW/VND 원단위; USD 달러 센트가 아닌 정수 금액"
+  },
+  {
+    "id": "ddoc",
+    "label": "도착지 서류비",
+    "currency": "VND",
+    "amounts": {
+      "bl": 950000
+    },
+    "basis": "bl",
+    "side": "destination",
+    "provenance": "estimate",
+    "sourceId": "KM-REFERENCE",
+    "assumption": "타사 비교 규모 945000 VND를 참고해 950000으로 둔 연습용 가정.",
+    "effectiveFrom": "2026-09-01",
+    "effectiveTo": "2026-10-31",
+    "origin": "KRPUS",
+    "destination": "VNHPH",
+    "containerType": "GP",
+    "unit": "KRW/VND 원단위; USD 달러 센트가 아닌 정수 금액"
+  }
+]

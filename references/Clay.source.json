@@ -1,0 +1,11 @@
+{
+  "checked": "2026-09-21",
+  "page": "https://getdesign.md/clay/design-md",
+  "preview": "https://getdesign.md/design-md/clay/preview",
+  "download": "https://raw.githubusercontent.com/VoltAgent/awesome-design-md/e06a96660396d741d0c106c8972172254dafbdc2/design-md/clay/DESIGN.md",
+  "commit": "e06a96660396d741d0c106c8972172254dafbdc2",
+  "sha256": "1abd803a207fbe950a06e155adcd6013c2e149b13e7b88844f5069f9d3d99eb3",
+  "bytes": 25705,
+  "author": "VoltAgent independent design analysis; not official Clay guidance",
+  "license": "VoltAgent-LICENSE.txt"
+}

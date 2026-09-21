@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>알파카 물류 · 가상 문의 검토</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1 id="app-title">알파카 물류 · 가상 문의 검토</h1>
+    <p class="subtitle">부산(KRPUS) → 하이퐁(VNHPH) 운임 문의 · 수업용 가상 데이터</p>
+  </header>
+
+  <main class="layout">
+    <!-- 왼쪽: 문의 원문 -->
+    <section class="panel" aria-labelledby="inquiry-heading">
+      <h2 id="inquiry-heading">문의 원문</h2>
+
+      <label class="field">
+        <span class="field-label">문의 선택</span>
+        <select id="inquiry-select" aria-describedby="inquiry-help"></select>
+      </label>
+      <p id="inquiry-help" class="help">가상 문의 네 통 중 하나를 고르세요.</p>
+
+      <pre id="inquiry-text" class="inquiry-text" aria-live="polite"></pre>
+
+      <div class="action-row">
+        <button type="button" id="extract-btn" class="btn">문의 분석</button>
+      </div>
+      <p id="extract-status" class="ai-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- 오른쪽: 사람이 확인·수정하는 입력 폼 -->
+    <section class="panel" aria-labelledby="form-heading">
+      <h2 id="form-heading">입력 확인</h2>
+      <p class="help">원문을 보며 직접 채우세요. 원문에 없는 값은 비워 두세요.</p>
+
+      <form id="quote-form" novalidate>
+        <label class="field">
+          <span class="field-label">문의자</span>
+          <input type="text" id="requester" name="requester" autocomplete="off" />
+        </label>
+
+        <div class="field-row">
+          <label class="field">
+            <span class="field-label">출발항</span>
+            <input type="text" id="origin" name="origin" placeholder="KRPUS" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span class="field-label">도착항</span>
+            <input type="text" id="destination" name="destination" placeholder="VNHPH" autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span class="field-label">컨테이너 종류</span>
+            <select id="containerType" name="containerType">
+              <option value="">선택 안 함</option>
+              <option value="GP">GP (일반)</option>
+              <option value="HC">HC (하이큐브)</option>
+              <option value="RF">RF (냉동)</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">크기</span>
+            <select id="containerSize" name="containerSize">
+              <option value="">선택 안 함</option>
+              <option value="20">20피트</option>
+              <option value="40">40피트</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span class="field-label">수량 (대)</span>
+            <input type="number" id="quantity" name="quantity" min="0" step="1" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span class="field-label">컨테이너당 중량 (kg)</span>
+            <input type="number" id="weightPerContainer" name="weightPerContainer" min="0" step="1" autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span class="field-label">B/L 건수</span>
+            <input type="number" id="blCount" name="blCount" min="0" step="1" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span class="field-label">품명</span>
+            <input type="text" id="commodity" name="commodity" autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span class="field-label">화물 준비일</span>
+            <input type="date" id="readyDate" name="readyDate" />
+          </label>
+          <label class="field">
+            <span class="field-label">희망 출항일</span>
+            <input type="date" id="departureDate" name="departureDate" />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span class="field-label">위험물 여부</span>
+            <select id="hazardous" name="hazardous">
+              <option value="">선택 안 함</option>
+              <option value="no">비위험물</option>
+              <option value="yes">위험물</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">운송 범위</span>
+            <select id="serviceScope" name="serviceScope">
+              <option value="">선택 안 함</option>
+              <option value="CY-CY">CY-CY</option>
+              <option value="CY-DOOR">CY-DOOR</option>
+              <option value="DOOR-CY">DOOR-CY</option>
+              <option value="DOOR-DOOR">DOOR-DOOR</option>
+            </select>
+          </label>
+        </div>
+
+        <button type="button" id="reset-form" class="btn btn-secondary">입력 비우기</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- 비용 검토 · 통화별 소계 · 보류 -->
+  <section class="panel panel-wide" aria-labelledby="cost-heading">
+    <h2 id="cost-heading">비용 검토</h2>
+    <p class="help">
+      금액은 코드가 원본 단가와 수량·B/L 건수로 계산합니다. 통화는 서로 더하지 않습니다.
+      <strong>공개</strong>는 공지에서 확인한 값, <strong>추정</strong>은 교육용 가정입니다.
+    </p>
+
+    <div class="table-scroll">
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th scope="col">항목</th>
+            <th scope="col">출처</th>
+            <th scope="col">적용기간</th>
+            <th scope="col">단위</th>
+            <th scope="col" class="num">단가</th>
+            <th scope="col" class="num">수량</th>
+            <th scope="col" class="num">금액</th>
+          </tr>
+        </thead>
+        <tbody id="cost-rows"></tbody>
+      </table>
+    </div>
+    <p id="cost-empty" class="help" hidden>계산된 항목이 없습니다.</p>
+
+    <h3 class="section-title">통화별 소계</h3>
+    <ul id="subtotals" class="subtotals"></ul>
+
+    <h3 class="section-title">보류</h3>
+    <ul id="held-list" class="held-list"></ul>
+    <p id="held-empty" class="help" hidden>보류된 항목이 없습니다.</p>
+
+    <h3 class="section-title">회신 초안</h3>
+    <p class="help">
+      금액은 서버가 원본 요율로 다시 계산한 값입니다. AI는 문장만 씁니다.
+      보내기 전에 담당자가 반드시 읽고 고치세요. 이 앱은 메일을 보내지 않습니다.
+    </p>
+    <div class="action-row">
+      <button type="button" id="draft-btn" class="btn">회신 초안 만들기</button>
+    </div>
+    <p id="draft-status" class="ai-status" role="status" aria-live="polite"></p>
+    <textarea id="draft-text" class="draft-text" rows="12" aria-label="회신 초안" hidden></textarea>
+  </section>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
